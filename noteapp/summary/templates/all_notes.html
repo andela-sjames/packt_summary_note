@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+    <form>
+        <input type="text" placeholder="Search your summary notes" name="q" list="note_id">
+            <datalist id="note_id">
+                {% for note in notes %}
+                    <option value="{{ note.name }}">
+                {% endfor %}
+            </datalist>
+        <input type="submit" class="btn btn-success">
+    </form>
+
+
+    <p>If you are here, then you have done your homework properly!!!</p>
+
+
+{% endblock main %}
