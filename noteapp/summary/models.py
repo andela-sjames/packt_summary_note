@@ -4,7 +4,7 @@ from django.db import models
 
 class SummaryNote(models.Model):
     title = models.CharField(max_length=60)
-    content = models.models.TextField()
+    content = models.TextField()
 
-     def __unicode__(self):
+    def __unicode__(self):
         return self.title

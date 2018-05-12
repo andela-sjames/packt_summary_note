@@ -6,14 +6,24 @@
         <input type="text" placeholder="Search your summary notes" name="q" list="note_id">
             <datalist id="note_id">
                 {% for note in notes %}
-                    <option value="{{ note.name }}">
+                    <option value="{{ note.title }}">
                 {% endfor %}
             </datalist>
         <input type="submit" class="btn btn-success">
     </form>
 
-
-    <p>If you are here, then you have done your homework properly!!!</p>
-
+    {% for note in notes %}
+    <div class="card horizontal">
+      
+        <div class="card-stacked">
+            <div class="card-content">
+                    <h5> {{ note.title }}<h5>
+                    <p> {{ note.content }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p>Book not found </p>
+    {% endfor %}
 
 {% endblock main %}
