@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 from django.db.models import Q
 
 from .models import SummaryNote
+from .documents import elastic_search
+
 
 # Create your views here.
 
