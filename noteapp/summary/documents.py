@@ -18,7 +18,7 @@ notes.settings(
     number_of_replicas=0
 )
 
-@book.doc_type
+@notes.doc_type
 class NotesDocument(DocType):
 
     class Meta:

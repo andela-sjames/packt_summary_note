@@ -1,5 +1,5 @@
 from django.conf.urls import url
-import .views
+from summary import views
 
 urlpatterns = [
     url(r'^search/$', views.SearchView.as_view(), name='search'),

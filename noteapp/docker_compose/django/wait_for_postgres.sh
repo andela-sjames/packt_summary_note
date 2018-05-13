@@ -21,4 +21,5 @@ done
 # Start app
 >&2 echo "Postgres is up - executing command"
 
+# start application
 ./docker_compose/django/start.sh
