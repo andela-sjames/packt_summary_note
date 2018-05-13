@@ -14,7 +14,7 @@ class HomeView(TemplateView):
     def get(self, request):
         
         query_text = request.GET.get('q', '')
-        args = dict()
+        args = {}
         all_notes = SummaryNote.objects.all()
 
         if query_text:
@@ -37,3 +37,19 @@ class HomeView(TemplateView):
             search_result = []
 
         return search_result
+
+
+class SearchView(TemplateView):
+    template_name = 'ajax_search.html'
+    args = {}
+
+    def get(self, request):
+        query_text = request.GET.get('q', '')
+        search_result = elastic_search(query_text)
+
+        if not search_result:
+            search_result = []
+
+        args['notes'] = search_result
+
+        return render(request, self.template_name, args)

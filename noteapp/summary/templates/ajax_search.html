@@ -1,0 +1,9 @@
+{% if notes.count > 0 %}
+
+{% for note in notes %}
+    <li> {{note.tile }} </li>
+{% endfor %}
+
+{% else %}
+<li>Search found nothing!</li>
+{% endif %}

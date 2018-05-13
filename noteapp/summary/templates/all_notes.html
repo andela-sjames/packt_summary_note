@@ -3,15 +3,10 @@
 
 {% block main %}
     <form>
-        <input type="text" placeholder="Search your summary notes" name="q" list="note_id">
-            <datalist id="note_id">
-                {% for note in notes %}
-                    <option value="{{ note.title }}">
-                {% endfor %}
-            </datalist>
-        <input type="submit" class="btn btn-success blue-grey lighten-1">
+        <input type="text" placeholder="Search your summary notes" name="search" id="search">
     </form>
-
+    <ul id="search_results"></ul>
+    
     {% for note in notes %}
     <div class="card horizontal">
       
@@ -27,3 +22,31 @@
     {% endfor %}
 
 {% endblock main %}
+
+{% block scripts %}
+<script>
+
+    $(function() {
+
+        $('#search').keyup(function() {
+
+            $.ajax({
+                type: "GET",
+                url: "/summary/search/",
+                data: { 
+                    'q' : $('#search').val(),
+                },
+                success: searchSuccess,
+                dataType: 'html'
+            });
+
+        });
+    });
+
+    function searchSuccess(data, textStatus, jqXHR) {
+        $('#search_results').html(data);
+    }
+
+</script>
+
+{% endblock scripts %}
