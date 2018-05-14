@@ -10,7 +10,7 @@ echo "from django.contrib.auth.models import User; User.objects.filter(email='ad
 
 # wait for elasticsearch status to be green
 function es_ready() {
-    curl -o -XGET 'http://es:9200/_cluster/health?waitForStatus=green&pretty=true'
+    curl -o -XGET 'http://es:9200/_cluster/health?wait_for_status=green&pretty=true'
 }
 
 until es_ready; do
