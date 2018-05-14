@@ -1,3 +1,9 @@
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.db.models import Q
@@ -25,6 +31,7 @@ class HomeView(TemplateView):
             all_notes = SummaryNote.objects.all()
             args['notes'] = all_notes
         
+        logger.info("Home view called django logger")
         return render(request, self.template_name, args)
 
     @staticmethod
@@ -41,10 +48,11 @@ class HomeView(TemplateView):
 
 class SearchView(TemplateView):
     template_name = 'ajax_search.html'
-    args = {}
 
     def get(self, request):
         query_text = request.GET.get('q', '')
+        args = {}
+
         search_result = elastic_search(query_text)
 
         if not search_result:

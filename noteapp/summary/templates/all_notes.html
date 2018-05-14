@@ -28,7 +28,9 @@
 
     $(function() {
 
-        $('#search').keyup(function() {
+        $('#search').keyup(function(event) {
+
+            event.preventDefault();
 
             $.ajax({
                 type: "GET",

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'summary.apps.SummaryConfig',
     'django_elasticsearch_dsl',
+    'autofixture',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +74,7 @@ WSGI_APPLICATION = 'noteapp.wsgi.application'
 
 ELASTICSEARCH_DSL={
     'default': {
-        'hosts': 'localhost:9200'
+        'hosts': 'es:9200'
     },
 }
 

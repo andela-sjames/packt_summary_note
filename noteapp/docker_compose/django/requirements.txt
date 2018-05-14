@@ -6,3 +6,4 @@ psycopg2==2.7.3.1
 python-json-logger==0.1.7
 python-logstash==0.4.6
 django-elasticsearch-dsl==0.1.0
+django-autofixture==0.12.1

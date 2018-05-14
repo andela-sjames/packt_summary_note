@@ -1,0 +1,13 @@
+{
+  "error" : {
+    "root_cause" : [
+      {
+        "type" : "illegal_argument_exception",
+        "reason" : "request [/_cluster/health] contains unrecognized parameter: [waitForStatus] -> did you mean [wait_for_status]?"
+      }
+    ],
+    "type" : "illegal_argument_exception",
+    "reason" : "request [/_cluster/health] contains unrecognized parameter: [waitForStatus] -> did you mean [wait_for_status]?"
+  },
+  "status" : 400
+}

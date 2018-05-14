@@ -1,17 +1,14 @@
-from elasticsearch_dsl.connections import connections
 from django_elasticsearch_dsl import DocType, Index
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
+from elasticsearch_dsl.query import Q
 
-client = Elasticsearch()
-
+client = Elasticsearch(['es:9200'])
 my_search = Search(using=client)
 
 from .models import SummaryNote
 
-connections.create_connection()
-
-notes = Index('SummaryNote')
+notes = Index('summarynote')
 
 notes.settings(
     number_of_shards=1,
@@ -25,10 +22,12 @@ class NotesDocument(DocType):
         model = SummaryNote
         fields = ['title', 'content']
 
-
-# define simple search here
-# Simple search function
+# define multi_match search 
+# reference: http://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html
 def elastic_search(title):
-    query = my_search.query("match", title=title)
+    q = Q("multi_match", query=title, fields=['title', 'content'])
+
+    query = my_search.query(q)
     response = query.execute()
+
     return response

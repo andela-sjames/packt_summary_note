@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import autofixture
+
 from django.conf.urls import url, include
 from django.contrib import admin
 from summary import views
@@ -24,3 +26,5 @@ urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='homepage'),
     url(r'^summary/', include(summary.urls)),
 ]
+
+autofixture.autodiscover()
