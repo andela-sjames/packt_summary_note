@@ -1,7 +1,7 @@
 # packt_summary_note
 A simple summary note application using Python/Django to demonstrate the Elastic Stack for Packt Courseware
 
-###Setup Using docker/docker-compose
+### Setup Using docker/docker-compose
 
 Before setting up this project, make sure you have docker installed on your system. 
 [docker download page](https://www.docker.com/community-edition) 
