@@ -1,3 +1,5 @@
+# Use base image from docker hun to build the image for dockerfile
 FROM kibana:5
 
+# copy kinaba.yml file from local file sytem to docker container for execution
 COPY kibana.yml /etc/kibana/kibana.yml

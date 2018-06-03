@@ -1,5 +1,8 @@
+# use the standard elasticsearch version 5 base image for this dockerfile
 FROM elasticsearch:5
 
+# set environment variable here
 ENV ES_JAVA_OPTS="-Des.path.conf=/etc/elasticsearch ${ES_JAVA_OPTS}"
 
+# execute the command  when the container starts from this image
 CMD ["-E", "network.host=0.0.0.0", "-E", "discovery.zen.minimum_master_nodes=1"]
