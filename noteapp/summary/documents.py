@@ -3,11 +3,13 @@ from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 from elasticsearch_dsl.query import Q
 
+# instantiate elasticsearch to use our custom es url
 client = Elasticsearch(['es:9200'])
 my_search = Search(using=client)
 
 from .models import SummaryNote
 
+# create our index here
 notes = Index('summarynote')
 
 notes.settings(
@@ -15,6 +17,7 @@ notes.settings(
     number_of_replicas=0
 )
 
+# define our document type here
 @notes.doc_type
 class NotesDocument(DocType):
 
