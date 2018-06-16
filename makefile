@@ -9,16 +9,16 @@ stop_app:
 	docker-compose down
 
 ssh_logstash:
-	docker exec -it logstash bash
+	docker exec -it noteapp_logstash bash
 
 ssh_django_web:
-	docker exec -it django_web bash
+	docker exec -it noteapp_django_web bash
 
 ssh_db:
-	docker exec -it db bash
+	docker exec -it noteapp_db bash
 
 ssh_es:
-	docker exec -it es bash
+	docker exec -it noteapp_es bash
 
 ssh_kibana:
-	docker exec -it kibana bash
+	docker exec -it noteapp_kibana bash
