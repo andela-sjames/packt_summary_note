@@ -25,7 +25,7 @@ SECRET_KEY = 'di%1ok^w+l2&pulj@)&ryd@wpq3@6m$f3a15%n8mtm__xdfz@u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,14 +79,14 @@ ELASTICSEARCH_DSL={
 }
 
 LOGGING = {
-  'version': 1,
-  'disable_existing_loggers': False,
-  'formatters': {
-      'simple': {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
             'format': '%(levelname)s %(message)s'
+            },
         },
-  },
-  'handlers': {
+    'handlers': {
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
@@ -100,23 +100,19 @@ LOGGING = {
             'version': 1, # Version of logstash event schema. Default value: 0 (for backward compatibility of the library)
             'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
             'fqdn': False, # Fully qualified domain name. Default value: false.
-            'tags': ['django'], # list of tags. Default: None.
+            'tags': ['django.request'], # list of tags. Default: None.
         },
-  },
-  'loggers': {
-        'app.logger': {
-            'handlers': ['logstash', 'console'],
-            'level': 'WARNING',
-            'propagate': True,
-        },
+    },
+    'loggers': {
         'django': {
             'handlers': ['console'],
             'level': 'INFO',
         },
         'django.request': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        }
+            'handlers': ['logstash'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
     },
 }
 

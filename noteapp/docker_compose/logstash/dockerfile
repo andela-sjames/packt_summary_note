@@ -2,6 +2,7 @@ FROM logstash:5
 
 # copy local file from folder to logstash container for execution
 COPY logstash.conf /etc/logstash/conf.d/logstash.conf
+COPY logstash.yml /etc/logstash/logstash.yml
 
 # Add your logstash plugins setup here
 # Example: RUN logstash-plugin install logstash-filter-json

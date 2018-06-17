@@ -47,7 +47,7 @@ services:
       dockerfile: Dockerfile
     container_name: noteapp_logstash
     ports:
-      - "5959:5959" 
+      - "5959:5959"
     depends_on:
     - es
   django_web:
@@ -67,6 +67,8 @@ services:
     command: ["./docker_compose/django/wait_for_postgres.sh"]
     ports:
       - "8000:8000"
+    expose:
+      - "5959"
     logging:
       driver: "json-file"
     volumes:
