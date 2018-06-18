@@ -52,26 +52,27 @@ services:
       - ./noteapp/docker_compose/logstash/pipeline:/usr/share/logstash/pipeline
     ports:
       - "5044:5044"
+      - "5959:5959"
     environment:
       - ELASTICSEARCH_URL=http://es:9200
     depends_on:
     - es
-  filebeat:
-    labels:
-      com.example.service: "filebeat"
-      com.example.description: "For sending log files to logstash"
-    build:
-      context: ./noteapp/docker_compose/filebeat/
-      dockerfile: Dockerfile
-    container_name: noteapp_filebeat
-    volumes:
-      - ./noteapp/logs:/usr/share/filebeat/logs
-    environment:
-      - LOGSTASH_URL=logstash:5044
-    expose:
-      - "5044"
-    depends_on:
-      - logstash
+  # filebeat:
+  #   labels:
+  #     com.example.service: "filebeat"
+  #     com.example.description: "For sending log files to logstash"
+  #   build:
+  #     context: ./noteapp/docker_compose/filebeat/
+  #     dockerfile: Dockerfile
+  #   container_name: noteapp_filebeat
+  #   volumes:
+  #     - ./noteapp/logs:/usr/share/filebeat/logs
+  #   environment:
+  #     - LOGSTASH_URL=logstash:5044
+  #   expose:
+  #     - "5044"
+  #   depends_on:
+  #     - logstash
   django_web:
     container_name: noteapp_django_web
     labels:
@@ -87,8 +88,12 @@ services:
       - es
       - kibana
       - logstash
-      - filebeat
+      # - filebeat
     command: ["./docker_compose/django/wait_for_postgres.sh"]
+    environment:
+      - LOGSTASH_HOST=logstash
+    expose:
+      - "5959"
     ports:
       - "8000:8000"
     logging:

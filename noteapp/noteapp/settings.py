@@ -103,6 +103,16 @@ LOGGING = {
             'formatter': 'logstash',
             'filename': os.path.join(LOG_DIR, 'debug.log')
         },
+        'logstash': {
+            'level': 'WARNING',
+            'class': 'logstash.TCPLogstashHandler',
+            'host': os.environ.get('LOGSTASH_HOST'),
+            'port': 5959, # Default value: 5959
+            'version': 1, # Version of logstash event schema. Default value: 0 (for backward compatibility of the library)
+            'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
+            'fqdn': False, # Fully qualified domain name. Default value: false.
+            'tags': ['django.request'], # list of tags. Default: None.
+        },
     },
     'loggers': {
         'console': {
@@ -111,6 +121,11 @@ LOGGING = {
         },
         'django': {
             'handlers': ['logfile'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['logstash'],
             'level': 'WARNING',
             'propagate': True,
         },
