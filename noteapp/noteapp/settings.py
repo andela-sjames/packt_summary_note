@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOG_DIR = BASE_DIR + '/' + 'logs'
 
 
 # Quick-start development settings - unsuitable for production
@@ -83,7 +84,11 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'simple': {
-            'format': '%(levelname)s %(message)s'
+            'format': '%(levelname)s ---- %(message)s'
+            },
+        'logstash': {
+            'class': 'logstash_formatter.LogstashFormatterV1',
+            'format': '{"extra": {"pack_note": "elastic stack", "user": true, "type": "django"}}',
             },
         },
     'handlers': {
@@ -92,30 +97,25 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'logstash': {
+        'logfile': {
             'level': 'WARNING',
-            'class': 'logstash.TCPLogstashHandler',
-            'host': 'localhost',
-            'port': 5959, # Default value: 5959
-            'version': 1, # Version of logstash event schema. Default value: 0 (for backward compatibility of the library)
-            'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
-            'fqdn': False, # Fully qualified domain name. Default value: false.
-            'tags': ['django.request'], # list of tags. Default: None.
+            'class': 'logging.FileHandler',
+            'formatter': 'logstash',
+            'filename': os.path.join(LOG_DIR, 'debug.log')
         },
     },
     'loggers': {
-        'django': {
+        'console': {
             'handlers': ['console'],
             'level': 'INFO',
         },
-        'django.request': {
-            'handlers': ['logstash'],
+        'django': {
+            'handlers': ['logfile'],
             'level': 'WARNING',
             'propagate': True,
         },
     },
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

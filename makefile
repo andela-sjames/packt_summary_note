@@ -22,3 +22,6 @@ ssh_es:
 
 ssh_kibana:
 	docker exec -it noteapp_kibana bash
+
+ssh_filebeat:
+	docker exec -it noteapp_filebeat bash

@@ -1,0 +1,15 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /usr/share/filebeat/logs/*.log
+
+processors:
+- add_cloud_metadata:
+
+# output.elasticsearch:
+#   hosts: ['elasticsearch:9200']
+#   username: elastic
+#   password: changeme
+
+output.logstash:
+  hosts: ["${LOGSTASH_URL}"]

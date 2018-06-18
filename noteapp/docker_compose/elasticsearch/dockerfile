@@ -1,5 +1,5 @@
 # use the standard elasticsearch version 5 base image for this dockerfile
-FROM elasticsearch:5
+FROM elasticsearch:5.4.3
 
 # set environment variable here
 ENV ES_JAVA_OPTS="-Des.path.conf=/etc/elasticsearch ${ES_JAVA_OPTS}"

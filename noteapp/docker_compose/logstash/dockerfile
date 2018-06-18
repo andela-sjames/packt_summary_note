@@ -1,11 +1,7 @@
-FROM logstash:5
-
-# copy local file from folder to logstash container for execution
-COPY logstash.conf /etc/logstash/conf.d/logstash.conf
-COPY logstash.yml /etc/logstash/logstash.yml
+FROM docker.elastic.co/logstash/logstash:5.4.3
 
 # Add your logstash plugins setup here
 # Example: RUN logstash-plugin install logstash-filter-json
 
-# execute command for application
-CMD ["-f", "etc/logstash/conf.d/"]
+# Add your logstash plugins setup here
+RUN logstash-plugin update logstash-input-beats

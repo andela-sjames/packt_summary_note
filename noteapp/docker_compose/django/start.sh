@@ -24,4 +24,7 @@ done
 # auto generate data for database
 python manage.py loadtestdata summary.SummaryNote:5
 
+# run this after all services has started from the root folder
+# docker-compose run --rm filebeat curl -H 'Content-Type: application/json' -XPUT 'http://es:9200/_template/filebeat' -d@filebeat.template.json
+
 python manage.py runserver 0.0.0.0:8000
