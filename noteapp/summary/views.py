@@ -1,9 +1,3 @@
-# import the logging library
-# import logging
-
-# Get an instance of a logger
-# logger = logging.getLogger('app.logger')
-
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.db.models import Q
@@ -31,7 +25,6 @@ class HomeView(TemplateView):
             all_notes = SummaryNote.objects.all()
             args['notes'] = all_notes
         
-        # logger.info("Home view called django logger")
         return render(request, self.template_name, args)
 
     @staticmethod
