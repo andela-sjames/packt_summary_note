@@ -3,7 +3,7 @@ elasticsearch-dsl==5.3.0
 django-elasticsearch-dsl==0.1.0
 django-autofixture==0.12.1
 cached-property==1.4.3
-certifi==2018.4.16
+certifi==2022.12.7
 chardet==3.0.4
 Django==2.0.5
 docker==3.3.0
